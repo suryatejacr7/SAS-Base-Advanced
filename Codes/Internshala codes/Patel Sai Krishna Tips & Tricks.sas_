@@ -1,0 +1,31 @@
+data class;
+input name$ gender$ age area$;
+cards;
+surya SM 24 RAMS
+Krish FM 24 BACH
+Jai M 26 HYD
+varsh f 23 BEG
+Manasa F 24 ALW
+;
+run;
+
+/* For path we use ODS trace on */
+ods trace on;
+proc freq data=class;
+table name gender area;
+run;
+ods trace off;
+
+/* sai krishna tips & tricks */
+ods pdf file="/home/u60870018/Internshala/save.pdf"; /*ods trace on*/
+proc means data=class;
+var age;
+run;
+ods pdf close; /*ods trace off*/
+
+/* data base lo generate aythad path so takes that to create a usable dataset */
+ods output Means.Summary=meandata;
+proc means data=class;
+var age;
+run; 
+ods output off;

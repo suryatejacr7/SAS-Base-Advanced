@@ -1,0 +1,14 @@
+libname source '/home/u60870018/Internshala/';
+proc sort data=source.salary out = salary;
+by name;
+run;
+data salary1;
+set salary;
+by name;
+retain totalsal 0 n 0;
+totalsal=totalsal+salary;
+n=n+1;
+if first.name then totalsal=salary;
+if first.name then n=1;
+if last.name then meansal=totalsal/n;
+run;

@@ -1,0 +1,17 @@
+proc sql;
+create table cars as 
+select make,type,origin,msrp from sashelp.cars
+where type <> "Wagon";
+
+
+create table carssorted as 
+select * from cars
+order by msrp desc;
+
+
+create table carssumm as 
+select make,type,origin,mean(msrp) format dollar8.2 as meanmsrp from cars
+group by make,type,origin;
+
+proc print data=carssumm;
+quit;
